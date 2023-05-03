@@ -14,7 +14,7 @@ const Home = () => {
 
   useEffect(() => {
     socket.on("render-new-post", (data) => {
-      console.log("Se ha creado un post");
+      console.log("Se ha creado un post", data);
     });
   }, [socket]);
 
