@@ -29,12 +29,12 @@ const PostCard = ({ post }) => {
         <header className="post__avatar">
           <img
             className="post__avatar-img"
-            src={post.user.profileImgUrl}
+            src={post?.user?.profileImgUrl}
             alt=""
           />
         </header>
         <article className="post__footer-info">
-          <h4 className="post__nameUser">{post.user.name}</h4>
+          <h4 className="post__nameUser">{post?.user?.name}</h4>
           <p className="post__date">
             {moment(post.updatedAt).format("MM-DD-YYYY")} --{" "}
             {moment(post.updatedAt).startOf("hour").fromNow()}

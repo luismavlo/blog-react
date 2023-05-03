@@ -1,21 +1,29 @@
 import PostCard from "../../components/home/PostCard";
 import "./home.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import FormPost from "../../components/home/FormPost";
 import { useEffect, useState } from "react";
 import { useSocket } from "./../../hooks/useSocket";
+import { addPost } from "../../store/slices/posts.slice";
 /* ----  */
 
 const Home = () => {
+  const dispatch = useDispatch();
+
   const { posts } = useSelector((state) => state);
   const { socket, online } = useSocket("http://localhost:3100");
+
+  console.log(posts);
 
   const [isCloseForm, setIsCloseForm] = useState(true);
 
   useEffect(() => {
-    socket.on("render-new-post", (data) => {
-      console.log("Se ha creado un post", data);
-    });
+    if (socket) {
+      socket.on("render-new-post", (data) => {
+        dispatch(addPost(data));
+        console.log("Se ha creado un post", data);
+      });
+    }
   }, [socket]);
 
   const handleCreatePost = () => {
