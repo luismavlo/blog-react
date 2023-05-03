@@ -10,10 +10,11 @@ const usePostCrud = () => {
   const dispatch = useDispatch();
 
   // POST - Crear un nuevo posts
-  const createNewPost = (formData) => {
+  const createNewPost = (formData, socket) => {
     blogApi
       .post("/posts", formData)
-      .then(() => {
+      .then((res) => {
+        socket.emit("new-post", res.data.post);
         dispatch(getAllPostThunk());
         dispatch(getMyPostsThunk());
       })

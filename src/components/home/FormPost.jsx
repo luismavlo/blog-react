@@ -3,7 +3,7 @@ import "./styles/formPost.css";
 import { useForm } from "react-hook-form";
 import usePostCrud from "../../hooks/usePostCrud";
 
-const FormPost = ({ isCloseForm, setIsCloseForm }) => {
+const FormPost = ({ isCloseForm, setIsCloseForm, socket }) => {
   const { handleSubmit, reset, register } = useForm();
 
   const handleClick = (e) => {
@@ -20,7 +20,7 @@ const FormPost = ({ isCloseForm, setIsCloseForm }) => {
     formData.append("title", data.title);
     formData.append("content", data.description);
     formData.append("postImgs", data.file);
-    createNewPost(formData);
+    createNewPost(formData, socket);
     reset();
   };
 
